@@ -63,14 +63,7 @@ fun HeroTopAppBar(modifier: Modifier = Modifier) {
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Image(
-                    modifier = Modifier
-                        .size(dimensionResource(id = R.dimen.image_size))
-                        .padding(dimensionResource(id = R.dimen.padding_small)),
-                    painter = painterResource(R.drawable.ic_launcher_foreground),
 
-                    contentDescription = null
-                )
                 Text(
                     text = stringResource(R.string.app_name),
                     style = MaterialTheme.typography.displayLarge
