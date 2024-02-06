@@ -26,9 +26,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.supeheroes.model.Hero
 import com.example.supeheroes.model.HeroesRepository
+import com.example.supeheroes.ui.theme.SupeheroesTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,8 +63,10 @@ fun HeroApp() {
             items(HeroesRepository.heroes) {
                 HeroItem(
                     hero = it,
-                    modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_medium), vertical = dimensionResource(
-                        id = R.dimen.padding_small))
+                    modifier = Modifier.padding(
+                        horizontal = dimensionResource(id = R.dimen.padding_medium),
+                        vertical = dimensionResource(id = R.dimen.padding_small)
+                    )
                 )
 
             }
@@ -84,7 +88,7 @@ fun HeroItem(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(dimensionResource(R.dimen.padding_small))
+                    .padding(dimensionResource(R.dimen.padding_medium))
             ) {
                 HeroInformation(heroName = hero.nameRes, heroDescription = hero.descriptionRes)
                 Spacer(Modifier.weight(1f))
@@ -109,13 +113,12 @@ fun HeroInformation(
         Text(
             text = stringResource(heroName),
             style = MaterialTheme.typography.displaySmall,
-            modifier = Modifier.padding(top = dimensionResource(R.dimen.padding_medium))
+            modifier = Modifier
         )
         Text(
             text = stringResource(heroDescription),
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier
-                .padding(bottom = dimensionResource(id = R.dimen.padding_medium))
                 .width(250.dp)
 
         )
@@ -127,16 +130,22 @@ fun HeroIcon(
     @DrawableRes heroIcon: Int,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier
-        .padding(dimensionResource(R.dimen.padding_small))) {
+    Column(modifier = modifier) {
         Image(
             modifier = modifier
                 .size(dimensionResource(R.dimen.image_size))
-                .padding(dimensionResource(R.dimen.padding_small))
                 .clip(MaterialTheme.shapes.small),
             contentScale = ContentScale.Crop,
             painter = painterResource(heroIcon),
             contentDescription = null
         )
+    }
+}
+
+@Preview
+@Composable
+fun HeroAppPreview() {
+    SupeheroesTheme(darkTheme = false) {
+        HeroApp()
     }
 }
